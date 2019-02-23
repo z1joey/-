@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate.h"
+#import "FirstViewController.h"
+#import "MyNavController.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +17,13 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    FirstViewController *fvc = [[FirstViewController alloc] init];
+    MyNavController *nav = [[MyNavController alloc] initWithRootViewController:fvc];
+    [self.window setRootViewController:nav];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
