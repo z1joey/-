@@ -8,6 +8,7 @@
 
 #import "PopViewController.h"
 #import "popView.h"
+#import "CategoryModel.h"
 
 @interface PopViewController ()
 
@@ -18,8 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    popView *pop = [popView makePopView];
-//    [self.view addSubview:pop];
+    popView *pop = [popView makePopView];
+    [self.view addSubview:pop];
+    pop.categoryArr = [self getData];
+    pop.autoresizingMask = UIViewAutoresizingNone;
+}
+
+- (NSArray *)getData {
+    CategoryModel *md = [[CategoryModel alloc] init];
+    NSArray *categoryArray = [md loadPlistData];
+    return categoryArray;
 }
 
 /*

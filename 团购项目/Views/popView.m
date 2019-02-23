@@ -7,18 +7,49 @@
 //
 
 #import "popView.h"
+#import "CategoryModel.h"
+
+@interface popView() <UITableViewDelegate, UITableViewDataSource>
+
+//@property (nonatomic, strong)NSArray *categoryArr;
+@property (weak, nonatomic) IBOutlet UITableView *leftTV;
+@property (weak, nonatomic) IBOutlet UITableView *rightTV;
+@property (strong, nonatomic) CategoryModel *selectedModel;
+@end
 
 @implementation popView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 + (popView *)makePopView {
-    return [[NSBundle mainBundle] loadNibNamed:@"popView" owner:self options:nil];
+    return [[[NSBundle mainBundle] loadNibNamed:@"popView" owner:self options:nil] firstObject];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (tableView == _leftTV) {
+        static NSString *str = @"Mycell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        }
+        CategoryModel *md = [_categoryArr objectAtIndex:indexPath.row];
+        cell.textLabel.text = md.name;
+        cell.imageView.image = [UIImage imageNamed:md.small_icon];
+        return cell;
+    } else {
+        static NSString *str = @"Mycell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        }
+        return cell;
+    }
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == _leftTV) {
+        return _categoryArr.count;
+    } else {
+        return _selectedModel.subcategories.count;
+    }
 }
 
 @end

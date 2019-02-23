@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface popView : UIView
+@property (nonatomic, strong)NSArray *categoryArr;
 + (popView*)makePopView;
 @end
 
