@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchCityResultViewController : UITableViewController
 
+@property (nonatomic, copy)NSString *searchText;
+@property (nonatomic, strong)NSArray *citiesArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

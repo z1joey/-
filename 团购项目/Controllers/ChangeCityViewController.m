@@ -23,7 +23,8 @@
 
 @implementation ChangeCityViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"切换城市";
@@ -84,6 +85,7 @@
 {
     if (searchText.length) {
         self.searchResultVC.view.hidden = NO;
+        self.searchResultVC.searchText = searchText;
     } else {
         self.searchResultVC.view.hidden = YES;
     }

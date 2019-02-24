@@ -14,6 +14,7 @@
 		65705B7E22230870008FEDE1 /* ChangeCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65705B7C22230870008FEDE1 /* ChangeCityViewController.xib */; };
 		65705B8122231CE9008FEDE1 /* SearchCityResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B8022231CE9008FEDE1 /* SearchCityResultViewController.m */; };
 		65705B8522231EA4008FEDE1 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B8322231EA4008FEDE1 /* UIView+AutoLayout.m */; };
+		65705B88222324EC008FEDE1 /* Cities.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B87222324EC008FEDE1 /* Cities.m */; };
 		65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838472221DDA9001DBD6D /* AppDelegate.m */; };
 		65E838502221DDAA001DBD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E8384F2221DDAA001DBD6D /* Assets.xcassets */; };
 		65E838562221DDAA001DBD6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838552221DDAA001DBD6D /* main.m */; };
@@ -44,6 +45,8 @@
 		65705B8022231CE9008FEDE1 /* SearchCityResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCityResultViewController.m; sourceTree = "<group>"; };
 		65705B8322231EA4008FEDE1 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		65705B8422231EA4008FEDE1 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		65705B86222324EC008FEDE1 /* Cities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cities.h; sourceTree = "<group>"; };
+		65705B87222324EC008FEDE1 /* Cities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cities.m; sourceTree = "<group>"; };
 		65E838432221DDA9001DBD6D /* 团购项目.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "团购项目.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E838462221DDA9001DBD6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65E838472221DDA9001DBD6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				65E838802221EBCE001DBD6D /* CategoryModel.m */,
 				65705B772223047D008FEDE1 /* CityGroupModel.h */,
 				65705B782223047D008FEDE1 /* CityGroupModel.m */,
+				65705B86222324EC008FEDE1 /* Cities.h */,
+				65705B87222324EC008FEDE1 /* Cities.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			files = (
 				65E8386B2221DFBB001DBD6D /* PopViewController.m in Sources */,
 				65E838812221EBCE001DBD6D /* CategoryModel.m in Sources */,
+				65705B88222324EC008FEDE1 /* Cities.m in Sources */,
 				65705B7D22230870008FEDE1 /* ChangeCityViewController.m in Sources */,
 				65E838562221DDAA001DBD6D /* main.m in Sources */,
 				65E838702221DFBB001DBD6D /* NavItem.m in Sources */,

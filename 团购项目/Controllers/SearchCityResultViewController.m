@@ -7,9 +7,12 @@
 //
 
 #import "SearchCityResultViewController.h"
+#import "Cities.h"
 
 @interface SearchCityResultViewController ()
-
+{
+    NSMutableArray *_searchResultArray;
+}
 @end
 
 @implementation SearchCityResultViewController
@@ -24,27 +27,38 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)setSearchText:(NSString *)searchText
+{
+    _searchText = [searchText lowercaseString];
+    
+    if (!_citiesArray) {
+        _citiesArray = [Cities getCities];
+    }
+    _searchResultArray = [[NSMutableArray alloc] init];
+    for (Cities *city in _citiesArray) {
+        if ([city.name containsString:_searchText] || [city.pinYin containsString:_searchText] || [city.pinYinHead containsString:_searchText]) {
+            [_searchResultArray addObject:city];
+        }
+    }
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return _searchResultArray.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    static NSString *str = @"searchCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+    }
+    Cities *city = [_searchResultArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = city.name;
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
