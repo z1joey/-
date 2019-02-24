@@ -16,16 +16,19 @@
 
 @implementation PopViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     popView *pop = [popView makePopView];
     [self.view addSubview:pop];
     pop.categoryArr = [self getData];
     pop.autoresizingMask = UIViewAutoresizingNone;
+    self.preferredContentSize = pop.frame.size;
 }
 
-- (NSArray *)getData {
+- (NSArray *)getData
+{
     CategoryModel *md = [[CategoryModel alloc] init];
     NSArray *categoryArray = [md loadPlistData];
     return categoryArray;

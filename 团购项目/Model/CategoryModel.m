@@ -10,14 +10,16 @@
 
 @implementation CategoryModel
 
-- (NSArray *)loadPlistData {
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"categories" ofType:nil];
+- (NSArray *)loadPlistData
+{
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"];
     NSArray *plistArray = [NSArray arrayWithContentsOfFile:file];
     NSArray *dataArray = [self getDataWithArray:plistArray];
     return dataArray;
 }
 
-- (void)makeModelWithDict: (NSDictionary *)dict {
+- (void)makeModelWithDict: (NSDictionary *)dict
+{
     self.highlighted_icon = [dict objectForKey:@"highlighted_icon"];
     self.icon = [dict objectForKey:@"icon"];
     self.small_highlighted_icon = [dict objectForKey:@"small_highlighted_icon"];
@@ -26,9 +28,11 @@
     self.subcategories = [dict objectForKey:@"subcategories"];
 }
 
-- (NSArray *)getDataWithArray: (NSArray *)array {
+- (NSArray *)getDataWithArray: (NSArray *)array
+{
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in array) {
+        NSLog(@"%@", dict);
         CategoryModel *md = [[CategoryModel alloc] init];
         [md makeModelWithDict:dict];
         [arr addObject:md];

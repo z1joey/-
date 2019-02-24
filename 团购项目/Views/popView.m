@@ -19,11 +19,13 @@
 
 @implementation popView
 
-+ (popView *)makePopView {
++ (popView *)makePopView
+{
     return [[[NSBundle mainBundle] loadNibNamed:@"popView" owner:self options:nil] firstObject];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
     if (tableView == _leftTV) {
         static NSString *str = @"Mycell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
@@ -33,6 +35,9 @@
         CategoryModel *md = [_categoryArr objectAtIndex:indexPath.row];
         cell.textLabel.text = md.name;
         cell.imageView.image = [UIImage imageNamed:md.small_icon];
+        if (md.subcategories.count) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         return cell;
     } else {
         static NSString *str = @"Mycell";
@@ -40,11 +45,21 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         }
+        cell.textLabel.text = _selectedModel.subcategories[indexPath.row];
         return cell;
     }
 }
 
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _leftTV) {
+        _selectedModel = [_categoryArr objectAtIndex:indexPath.row];
+        [_rightTV reloadData];
+    }
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (tableView == _leftTV) {
         return _categoryArr.count;
     } else {

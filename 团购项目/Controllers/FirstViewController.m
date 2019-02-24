@@ -29,7 +29,8 @@ static NSString * const reuseIdentifier = @"Cell";
     return [self initWithCollectionViewLayout:layout];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self createNavBar];
@@ -38,12 +39,11 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
 }
 
 #pragma mark - 创建导航栏
-- (void)createNavBar {
+- (void)createNavBar
+{
     UIBarButtonItem *logo = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_meituan_logo"] style:UIBarButtonItemStyleDone target:nil action:nil];
 
     NavItem *first = [NavItem makeItem];
@@ -61,47 +61,51 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark - 点击事件
-- (void)firstClick {
+- (void)firstClick
+{
     [self createPopver];
 }
 
-- (void)secondClick {
+- (void)secondClick
+{
     NSLog(@"1");
 }
 
-- (void)thirdClick {
+- (void)thirdClick
+{
     NSLog(@"1");
 }
 
 #pragma mark - 下拉菜单
-- (void)createPopver {
+- (void)createPopver
+{
     PopViewController *pvc = [[PopViewController alloc] init];
     UIPopoverController *pop = [[UIPopoverController alloc] initWithContentViewController:pvc];
     [pop presentPopoverFromBarButtonItem:firstItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-#pragma mark <UICollectionViewDataSource>
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
-    return cell;
-}
-
-#pragma mark <UICollectionViewDelegate>
+//#pragma mark <UICollectionViewDataSource>
+//
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+//#warning Incomplete implementation, return the number of sections
+//    return 0;
+//}
+//
+//
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//#warning Incomplete implementation, return the number of items
+//    return 0;
+//}
+//
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+//
+//    // Configure the cell
+//
+//    return cell;
+//}
+//
+//#pragma mark <UICollectionViewDelegate>
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
