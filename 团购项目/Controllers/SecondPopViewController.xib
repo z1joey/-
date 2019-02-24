@@ -31,6 +31,9 @@
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="highlighted" image="btn_changeCity_selected"/>
+                            <connections>
+                                <action selector="changeCityClick:" destination="-1" eventType="touchUpInside" id="sOp-mN-gTK"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_filter_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="oME-bz-NIn">
                             <rect key="frame" x="299" y="15" width="14" height="14"/>

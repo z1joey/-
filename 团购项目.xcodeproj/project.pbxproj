@@ -10,6 +10,10 @@
 		65705B742222FFCB008FEDE1 /* SecondPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B722222FFCB008FEDE1 /* SecondPopViewController.m */; };
 		65705B752222FFCB008FEDE1 /* SecondPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */; };
 		65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B782223047D008FEDE1 /* CityGroupModel.m */; };
+		65705B7D22230870008FEDE1 /* ChangeCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B7B22230870008FEDE1 /* ChangeCityViewController.m */; };
+		65705B7E22230870008FEDE1 /* ChangeCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65705B7C22230870008FEDE1 /* ChangeCityViewController.xib */; };
+		65705B8122231CE9008FEDE1 /* SearchCityResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B8022231CE9008FEDE1 /* SearchCityResultViewController.m */; };
+		65705B8522231EA4008FEDE1 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B8322231EA4008FEDE1 /* UIView+AutoLayout.m */; };
 		65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838472221DDA9001DBD6D /* AppDelegate.m */; };
 		65E838502221DDAA001DBD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E8384F2221DDAA001DBD6D /* Assets.xcassets */; };
 		65E838562221DDAA001DBD6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838552221DDAA001DBD6D /* main.m */; };
@@ -33,6 +37,13 @@
 		65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondPopViewController.xib; sourceTree = "<group>"; };
 		65705B772223047D008FEDE1 /* CityGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityGroupModel.h; sourceTree = "<group>"; };
 		65705B782223047D008FEDE1 /* CityGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityGroupModel.m; sourceTree = "<group>"; };
+		65705B7A22230870008FEDE1 /* ChangeCityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCityViewController.h; sourceTree = "<group>"; };
+		65705B7B22230870008FEDE1 /* ChangeCityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCityViewController.m; sourceTree = "<group>"; };
+		65705B7C22230870008FEDE1 /* ChangeCityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeCityViewController.xib; sourceTree = "<group>"; };
+		65705B7F22231CE9008FEDE1 /* SearchCityResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCityResultViewController.h; sourceTree = "<group>"; };
+		65705B8022231CE9008FEDE1 /* SearchCityResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCityResultViewController.m; sourceTree = "<group>"; };
+		65705B8322231EA4008FEDE1 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		65705B8422231EA4008FEDE1 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		65E838432221DDA9001DBD6D /* 团购项目.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "团购项目.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E838462221DDA9001DBD6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65E838472221DDA9001DBD6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -70,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65705B8222231E54008FEDE1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				65705B8422231EA4008FEDE1 /* UIView+AutoLayout.h */,
+				65705B8322231EA4008FEDE1 /* UIView+AutoLayout.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		65E8383A2221DDA9001DBD6D = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +109,7 @@
 		65E838452221DDA9001DBD6D /* 团购项目 */ = {
 			isa = PBXGroup;
 			children = (
+				65705B8222231E54008FEDE1 /* Extension */,
 				65E8387E2221EBAD001DBD6D /* Model */,
 				65E838742221EA5B001DBD6D /* Controllers */,
 				65E838732221EA4A001DBD6D /* Views */,
@@ -135,6 +156,11 @@
 				65705B712222FFCB008FEDE1 /* SecondPopViewController.h */,
 				65705B722222FFCB008FEDE1 /* SecondPopViewController.m */,
 				65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */,
+				65705B7A22230870008FEDE1 /* ChangeCityViewController.h */,
+				65705B7B22230870008FEDE1 /* ChangeCityViewController.m */,
+				65705B7C22230870008FEDE1 /* ChangeCityViewController.xib */,
+				65705B7F22231CE9008FEDE1 /* SearchCityResultViewController.h */,
+				65705B8022231CE9008FEDE1 /* SearchCityResultViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -226,6 +252,7 @@
 				65E8387A2221EAD1001DBD6D /* categories.plist in Resources */,
 				65705B752222FFCB008FEDE1 /* SecondPopViewController.xib in Resources */,
 				65E838792221EAD1001DBD6D /* cityGroups.plist in Resources */,
+				65705B7E22230870008FEDE1 /* ChangeCityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,11 +265,14 @@
 			files = (
 				65E8386B2221DFBB001DBD6D /* PopViewController.m in Sources */,
 				65E838812221EBCE001DBD6D /* CategoryModel.m in Sources */,
+				65705B7D22230870008FEDE1 /* ChangeCityViewController.m in Sources */,
 				65E838562221DDAA001DBD6D /* main.m in Sources */,
 				65E838702221DFBB001DBD6D /* NavItem.m in Sources */,
+				65705B8522231EA4008FEDE1 /* UIView+AutoLayout.m in Sources */,
 				65E838722221DFBB001DBD6D /* MyNavController.m in Sources */,
 				65E8386F2221DFBB001DBD6D /* FirstViewController.m in Sources */,
 				65E8386C2221DFBB001DBD6D /* popView.m in Sources */,
+				65705B8122231CE9008FEDE1 /* SearchCityResultViewController.m in Sources */,
 				65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */,
 				65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */,
 				65705B742222FFCB008FEDE1 /* SecondPopViewController.m in Sources */,
