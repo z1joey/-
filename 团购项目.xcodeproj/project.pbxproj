@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65705B742222FFCB008FEDE1 /* SecondPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B722222FFCB008FEDE1 /* SecondPopViewController.m */; };
+		65705B752222FFCB008FEDE1 /* SecondPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */; };
+		65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B782223047D008FEDE1 /* CityGroupModel.m */; };
 		65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838472221DDA9001DBD6D /* AppDelegate.m */; };
 		65E838502221DDAA001DBD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E8384F2221DDAA001DBD6D /* Assets.xcassets */; };
 		65E838562221DDAA001DBD6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E838552221DDAA001DBD6D /* main.m */; };
@@ -25,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65705B712222FFCB008FEDE1 /* SecondPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPopViewController.h; sourceTree = "<group>"; };
+		65705B722222FFCB008FEDE1 /* SecondPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondPopViewController.m; sourceTree = "<group>"; };
+		65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondPopViewController.xib; sourceTree = "<group>"; };
+		65705B772223047D008FEDE1 /* CityGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityGroupModel.h; sourceTree = "<group>"; };
+		65705B782223047D008FEDE1 /* CityGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityGroupModel.m; sourceTree = "<group>"; };
 		65E838432221DDA9001DBD6D /* 团购项目.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "团购项目.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E838462221DDA9001DBD6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65E838472221DDA9001DBD6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -124,6 +132,9 @@
 				65E8386A2221DFBB001DBD6D /* MyNavController.m */,
 				65E838612221DFB9001DBD6D /* PopViewController.h */,
 				65E8385D2221DFB9001DBD6D /* PopViewController.m */,
+				65705B712222FFCB008FEDE1 /* SecondPopViewController.h */,
+				65705B722222FFCB008FEDE1 /* SecondPopViewController.m */,
+				65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +155,8 @@
 			children = (
 				65E8387F2221EBCE001DBD6D /* CategoryModel.h */,
 				65E838802221EBCE001DBD6D /* CategoryModel.m */,
+				65705B772223047D008FEDE1 /* CityGroupModel.h */,
+				65705B782223047D008FEDE1 /* CityGroupModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +224,7 @@
 				65E838502221DDAA001DBD6D /* Assets.xcassets in Resources */,
 				65E8386E2221DFBB001DBD6D /* popView.xib in Resources */,
 				65E8387A2221EAD1001DBD6D /* categories.plist in Resources */,
+				65705B752222FFCB008FEDE1 /* SecondPopViewController.xib in Resources */,
 				65E838792221EAD1001DBD6D /* cityGroups.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +244,8 @@
 				65E8386F2221DFBB001DBD6D /* FirstViewController.m in Sources */,
 				65E8386C2221DFBB001DBD6D /* popView.m in Sources */,
 				65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */,
+				65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */,
+				65705B742222FFCB008FEDE1 /* SecondPopViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
