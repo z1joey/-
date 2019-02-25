@@ -10,8 +10,10 @@
 #import "popView.h"
 #import "CategoryModel.h"
 
-@interface PopViewController ()
-
+@interface PopViewController ()<MyPopviewDataSource>
+{
+    NSArray *_categoryArr;
+}
 @end
 
 @implementation PopViewController
@@ -21,10 +23,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     popView *pop = [popView makePopView];
+    pop.dataSource = self;
     [self.view addSubview:pop];
-    pop.categoryArr = [self getData];
+    //pop.categoryArr = [self getData];
     pop.autoresizingMask = UIViewAutoresizingNone;
     self.preferredContentSize = pop.frame.size;
+    _categoryArr = [self getData];
+    
 }
 
 - (NSArray *)getData
@@ -34,14 +39,25 @@
     return categoryArray;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - popview dataSource
+- (NSInteger)numberOfRowsInLeftTable:(popView *)popView
+{
+    return _categoryArr.count;
 }
-*/
+
+- (NSString *)popView:(popView *)popView titleForRow:(NSInteger)row
+{
+    return [_categoryArr[row] name];
+}
+
+- (NSString *)popView:(popView *)popView imageForRow:(NSInteger)row
+{
+    return [_categoryArr[row] small_icon];
+}
+
+- (NSArray *)popView:(popView *)popView subDataForRow:(NSInteger)row
+{
+    return [_categoryArr[row] subcategories];
+}
 
 @end

@@ -64,7 +64,7 @@
         // return _categoryArr.count;
         return [self.dataSource numberOfRowsInLeftTable:self];
     } else {
-        return [self.dataSource popView:self subDataForRow:_selectRow];
+        return [self.dataSource popView:self subDataForRow:_selectRow].count;
     }
 }
 
