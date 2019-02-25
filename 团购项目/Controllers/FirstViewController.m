@@ -12,12 +12,16 @@
 #import "SecondPopViewController.h"
 #import "CityGroupModel.h"
 #import "CategoryModel.h"
+#import "DPAPI.h"
 
-@interface FirstViewController ()
+@interface FirstViewController()<DPRequestDelegate>
 {
     UIBarButtonItem *firstItem;
     UIBarButtonItem *secondItem;
     UIBarButtonItem *thirdItem;
+    
+    NSString *_selectedCityName;
+    NSString *_selectedCategory;
 }
 @end
 
@@ -47,20 +51,60 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryChange:) name:@"categoryDidChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subCategoryChange:) name:@"subCategoryDidChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cityChange:) name:@"cityDidChanged" object:nil];
 }
 
 - (void)categoryChange:(NSNotification*)noti
 {
     CategoryModel *md = noti.userInfo[@"categoryModel"];
-    NSString *str = noti.userInfo[@"subCategoryName"];
     NSLog(@"---左表---%@", md.name);
-    NSLog(@"---右表---%@", str);
+
 }
 
 - (void)subCategoryChange:(NSNotification*)noti
 {
-    NSString *str = noti.userInfo[@"subCategoryName"];
-    NSLog(@"---从表---%@", str);
+    CategoryModel *md = noti.userInfo[@"categoryModel"];
+    NSString *selectedSubName = noti.userInfo[@"subCategoryName"];
+    NSLog(@"左表: %@------从表: %@", md.name, selectedSubName);
+    
+    if (!md.subcategories.count) {
+        _selectedCategory = md.name;
+    } else {
+        if ([selectedSubName isEqualToString:@"全部"]) {
+            _selectedCategory = md.name;
+        } else {
+            _selectedCategory = selectedSubName;
+        }
+    }
+    NSLog(@"Category selected: %@", _selectedCategory);
+    [self createRequest];
+}
+
+- (void)cityChange:(NSNotification*)noti
+{
+    _selectedCityName = noti.userInfo[@"cityName"];
+    [self createRequest];
+}
+
+#pragma mark - 网络请求
+- (void)createRequest
+{
+    DPAPI *api = [[DPAPI alloc] init];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setValue:_selectedCityName forKey:@"city"];
+    [params setValue:_selectedCategory forKey:@"category"];
+    [api requestWithURL:@"v1/deal/find_deals" params:(NSMutableDictionary *)params delegate:self];
+}
+
+#pragma mark - DPAPI delegate
+- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
+{
+    NSLog(@"%@", result);
+}
+
+- (void)request:(DPRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
 }
 
 #pragma mark - 创建导航栏

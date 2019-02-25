@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654397A4222479C60092698A /* DPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 654397A0222479C50092698A /* DPRequest.m */; };
+		654397A5222479C60092698A /* DPAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 654397A3222479C60092698A /* DPAPI.m */; };
 		65705B742222FFCB008FEDE1 /* SecondPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B722222FFCB008FEDE1 /* SecondPopViewController.m */; };
 		65705B752222FFCB008FEDE1 /* SecondPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */; };
 		65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65705B782223047D008FEDE1 /* CityGroupModel.m */; };
@@ -33,6 +35,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6543979F222479C50092698A /* DPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAPI.h; sourceTree = "<group>"; };
+		654397A0222479C50092698A /* DPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRequest.m; sourceTree = "<group>"; };
+		654397A1222479C50092698A /* DPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPConstants.h; sourceTree = "<group>"; };
+		654397A2222479C50092698A /* DPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRequest.h; sourceTree = "<group>"; };
+		654397A3222479C60092698A /* DPAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPAPI.m; sourceTree = "<group>"; };
 		65705B712222FFCB008FEDE1 /* SecondPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondPopViewController.h; sourceTree = "<group>"; };
 		65705B722222FFCB008FEDE1 /* SecondPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondPopViewController.m; sourceTree = "<group>"; };
 		65705B732222FFCB008FEDE1 /* SecondPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondPopViewController.xib; sourceTree = "<group>"; };
@@ -84,6 +91,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6543979D222479A30092698A /* 3rd */ = {
+			isa = PBXGroup;
+			children = (
+				6543979E222479B50092698A /* dianpingapi */,
+			);
+			path = 3rd;
+			sourceTree = "<group>";
+		};
+		6543979E222479B50092698A /* dianpingapi */ = {
+			isa = PBXGroup;
+			children = (
+				6543979F222479C50092698A /* DPAPI.h */,
+				654397A3222479C60092698A /* DPAPI.m */,
+				654397A1222479C50092698A /* DPConstants.h */,
+				654397A2222479C50092698A /* DPRequest.h */,
+				654397A0222479C50092698A /* DPRequest.m */,
+			);
+			path = dianpingapi;
+			sourceTree = "<group>";
+		};
 		65705B8222231E54008FEDE1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +139,7 @@
 		65E838452221DDA9001DBD6D /* 团购项目 */ = {
 			isa = PBXGroup;
 			children = (
+				6543979D222479A30092698A /* 3rd */,
 				65705B8222231E54008FEDE1 /* Extension */,
 				65E8387E2221EBAD001DBD6D /* Model */,
 				65E838742221EA5B001DBD6D /* Controllers */,
@@ -268,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				654397A5222479C60092698A /* DPAPI.m in Sources */,
 				65E8386B2221DFBB001DBD6D /* PopViewController.m in Sources */,
 				65E838812221EBCE001DBD6D /* CategoryModel.m in Sources */,
 				65705B88222324EC008FEDE1 /* Cities.m in Sources */,
@@ -278,6 +307,7 @@
 				65E838722221DFBB001DBD6D /* MyNavController.m in Sources */,
 				65E8386F2221DFBB001DBD6D /* FirstViewController.m in Sources */,
 				65E8386C2221DFBB001DBD6D /* popView.m in Sources */,
+				654397A4222479C60092698A /* DPRequest.m in Sources */,
 				65705B8122231CE9008FEDE1 /* SearchCityResultViewController.m in Sources */,
 				65E838482221DDA9001DBD6D /* AppDelegate.m in Sources */,
 				65705B792223047D008FEDE1 /* CityGroupModel.m in Sources */,

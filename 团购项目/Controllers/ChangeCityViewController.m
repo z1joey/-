@@ -69,6 +69,13 @@
     return md.title;    
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CityGroupModel *md = [_dataArray objectAtIndex:indexPath.section];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"cityDidChanged" object:nil userInfo:@{@"cityName":md.cities[indexPath.row]}];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UISearchBar delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {

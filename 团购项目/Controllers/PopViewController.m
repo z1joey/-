@@ -75,7 +75,7 @@
 - (void)popView:(popView *)popView didSelectRowAtRightTable:(NSInteger)row
 {
     NSArray *subArray = _selectedModel.subcategories;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"categoryDidChanged" object:nil userInfo:@{@"subCategoryName":subArray[row]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"subCategoryDidChanged" object:nil userInfo:@{@"categoryModel":_selectedModel, @"subCategoryName":subArray[row]}];
 }
 
 @end
