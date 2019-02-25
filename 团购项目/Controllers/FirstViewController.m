@@ -11,6 +11,7 @@
 #import "PopViewController.h"
 #import "SecondPopViewController.h"
 #import "CityGroupModel.h"
+#import "CategoryModel.h"
 
 @interface FirstViewController ()
 {
@@ -30,6 +31,11 @@ static NSString * const reuseIdentifier = @"Cell";
     return [self initWithCollectionViewLayout:layout];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,11 +45,22 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-//    CityGroupModel *md = [[CityGroupModel alloc] init];
-//    NSArray *arr = [md getModelArray];
-//    for (CityGroupModel *m in arr) {
-//        NSLog(@"%@", m.title);
-//    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryChange:) name:@"categoryDidChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subCategoryChange:) name:@"subCategoryDidChanged" object:nil];
+}
+
+- (void)categoryChange:(NSNotification*)noti
+{
+    CategoryModel *md = noti.userInfo[@"categoryModel"];
+    NSString *str = noti.userInfo[@"subCategoryName"];
+    NSLog(@"---左表---%@", md.name);
+    NSLog(@"---右表---%@", str);
+}
+
+- (void)subCategoryChange:(NSNotification*)noti
+{
+    NSString *str = noti.userInfo[@"subCategoryName"];
+    NSLog(@"---从表---%@", str);
 }
 
 #pragma mark - 创建导航栏

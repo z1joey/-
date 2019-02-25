@@ -10,9 +10,10 @@
 #import "popView.h"
 #import "CategoryModel.h"
 
-@interface PopViewController ()<MyPopviewDataSource>
+@interface PopViewController ()<MyPopviewDataSource, MyPopviewDelegate>
 {
     NSArray *_categoryArr;
+    CategoryModel *_selectedModel;
 }
 @end
 
@@ -24,6 +25,7 @@
     // Do any additional setup after loading the view.
     popView *pop = [popView makePopView];
     pop.dataSource = self;
+    pop.delegate = self;
     [self.view addSubview:pop];
     //pop.categoryArr = [self getData];
     pop.autoresizingMask = UIViewAutoresizingNone;
@@ -58,6 +60,22 @@
 - (NSArray *)popView:(popView *)popView subDataForRow:(NSInteger)row
 {
     return [_categoryArr[row] subcategories];
+}
+
+#pragma mark - popview delegate
+- (void)popView:(popView *)popView didSelectRowAtLeftTable:(NSInteger)row
+{
+    //NSArray *categoryArray = [self getData];
+    _selectedModel = _categoryArr[row];
+    if (!_selectedModel.subcategories.count) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"categoryDidChanged" object:nil userInfo:@{@"categoryModel":_selectedModel}];
+    }
+}
+
+- (void)popView:(popView *)popView didSelectRowAtRightTable:(NSInteger)row
+{
+    NSArray *subArray = _selectedModel.subcategories;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"categoryDidChanged" object:nil userInfo:@{@"subCategoryName":subArray[row]}];
 }
 
 @end
