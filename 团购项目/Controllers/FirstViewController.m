@@ -39,11 +39,11 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    CityGroupModel *md = [[CityGroupModel alloc] init];
-    NSArray *arr = [md getModelArray];
-    for (CityGroupModel *m in arr) {
-        NSLog(@"%@", m.title);
-    }
+//    CityGroupModel *md = [[CityGroupModel alloc] init];
+//    NSArray *arr = [md getModelArray];
+//    for (CityGroupModel *m in arr) {
+//        NSLog(@"%@", m.title);
+//    }
 }
 
 #pragma mark - 创建导航栏

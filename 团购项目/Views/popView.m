@@ -7,14 +7,13 @@
 //
 
 #import "popView.h"
-#import "CategoryModel.h"
 
 @interface popView() <UITableViewDelegate, UITableViewDataSource>
 
-//@property (nonatomic, strong)NSArray *categoryArr;
 @property (weak, nonatomic) IBOutlet UITableView *leftTV;
 @property (weak, nonatomic) IBOutlet UITableView *rightTV;
-@property (strong, nonatomic) CategoryModel *selectedModel;
+@property (nonatomic, assign) NSInteger selectRow;
+
 @end
 
 @implementation popView
@@ -32,10 +31,11 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         }
-        CategoryModel *md = [_categoryArr objectAtIndex:indexPath.row];
-        cell.textLabel.text = md.name;
-        cell.imageView.image = [UIImage imageNamed:md.small_icon];
-        if (md.subcategories.count) {
+        //CategoryModel *md = [_categoryArr objectAtIndex:indexPath.row];
+        cell.textLabel.text = [self.dataSource popView:self titleForRow:indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:[self.dataSource popView:self imageForRow:indexPath.row]];
+        NSArray *subDataArray = [self.dataSource popView:self subDataForRow:indexPath.row];
+        if (subDataArray.count) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         return cell;
@@ -45,7 +45,7 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         }
-        cell.textLabel.text = _selectedModel.subcategories[indexPath.row];
+        cell.textLabel.text = [self.dataSource popView:self subDataForRow:_selectRow][indexPath.row];
         return cell;
     }
 }
@@ -53,7 +53,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _leftTV) {
-        _selectedModel = [_categoryArr objectAtIndex:indexPath.row];
+        self.selectRow = indexPath.row;
         [_rightTV reloadData];
     }
 }
@@ -61,9 +61,10 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _leftTV) {
-        return _categoryArr.count;
+        // return _categoryArr.count;
+        return [self.dataSource numberOfRowsInLeftTable:self];
     } else {
-        return _selectedModel.subcategories.count;
+        return [self.dataSource popView:self subDataForRow:_selectRow];
     }
 }
 
