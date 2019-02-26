@@ -13,6 +13,8 @@
 #import "CityGroupModel.h"
 #import "CategoryModel.h"
 #import "DPAPI.h"
+#import "dealModel.h"
+#import "MainCollectionViewCell.h"
 
 @interface FirstViewController()<DPRequestDelegate>
 {
@@ -22,16 +24,19 @@
     
     NSString *_selectedCityName;
     NSString *_selectedCategory;
+    NSArray *_dataSource;
 }
 @end
 
 @implementation FirstViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"MainCell";
 
 - (instancetype)init
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(300, 300);
+    layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
     return [self initWithCollectionViewLayout:layout];
 }
 
@@ -47,18 +52,33 @@ static NSString * const reuseIdentifier = @"Cell";
     [self createNavBar];
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    // [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"MainCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryChange:) name:@"categoryDidChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subCategoryChange:) name:@"subCategoryDidChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cityChange:) name:@"cityDidChanged" object:nil];
 }
 
+#pragma mark - 屏幕旋转
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    int num = 2;
+    if (size.width == 1024) {
+        num = 3;
+    }
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    CGFloat inset = (size.width - num*layout.itemSize.width)/(num+1);
+    layout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
+    //上下间距
+    layout.minimumLineSpacing = inset;
+}
+
+#pragma mark - 通知方法
 - (void)categoryChange:(NSNotification*)noti
 {
     CategoryModel *md = noti.userInfo[@"categoryModel"];
     NSLog(@"---左表---%@", md.name);
-
 }
 
 - (void)subCategoryChange:(NSNotification*)noti
@@ -99,7 +119,13 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - DPAPI delegate
 - (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
 {
-    NSLog(@"%@", result);
+    //NSLog(@"%@", result);
+    NSDictionary *dict = result;
+    dealModel *md = [[dealModel alloc]init];
+    _dataSource = [md asignModelWithDict:dict];
+    [self.collectionView reloadData];
+    //NSArray *modelArray = [md asignModelWithDict:dict];
+    //NSLog(@"%lu === %@", _dataSource.count, [_dataSource[0] title]);
 }
 
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error
@@ -124,6 +150,9 @@ static NSString * const reuseIdentifier = @"Cell";
     thirdItem = [[UIBarButtonItem alloc] initWithCustomView:third];
     
     self.navigationItem.leftBarButtonItems = @[logo, firstItem, secondItem, thirdItem];
+    
+    // 如果不关autoresizing，横屏时nav item会错乱
+    self.navigationController.navigationBar.autoresizingMask = UIViewAutoresizingNone;
 }
 
 #pragma mark - 点击事件
@@ -158,27 +187,28 @@ static NSString * const reuseIdentifier = @"Cell";
     [pop presentPopoverFromBarButtonItem:secondItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-//#pragma mark <UICollectionViewDataSource>
-//
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-//#warning Incomplete implementation, return the number of sections
-//    return 0;
-//}
-//
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of items
-//    return 0;
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-//
-//    // Configure the cell
-//
-//    return cell;
-//}
-//
+#pragma mark - <UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    [self viewWillTransitionToSize:collectionView.frame.size withTransitionCoordinator:nil];
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _dataSource.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 已注册，不需要用懒加载
+    MainCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+
+    // Configure the cell
+    dealModel *md = _dataSource[indexPath.item];
+    [cell showUIWithModel:md];
+
+    return cell;
+}
+
 //#pragma mark <UICollectionViewDelegate>
 
 /*
