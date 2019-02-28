@@ -15,6 +15,8 @@
 #import "DPAPI.h"
 #import "dealModel.h"
 #import "MainCollectionViewCell.h"
+#import "MJRefresh.h"
+#import "DetailViewController.h"
 
 @interface FirstViewController()<DPRequestDelegate>
 {
@@ -24,8 +26,9 @@
     
     NSString *_selectedCityName;
     NSString *_selectedCategory;
-    NSArray *_dataSource;
+    NSMutableArray *_dataSource;
 }
+@property (nonatomic, assign)NSInteger page;
 @end
 
 @implementation FirstViewController
@@ -48,13 +51,31 @@ static NSString * const reuseIdentifier = @"MainCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    [self createNavBar];
     
-    // Register cell classes
-    // [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.alwaysBounceVertical = YES;
+    
+    _dataSource = [[NSMutableArray alloc] init];
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"MainCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     
+    self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self createRequest];
+        [self.collectionView.header endRefreshing];
+    }];
+    
+    self.collectionView.footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+        [self.collectionView.footer endRefreshing];
+    }];
+    
+    [self createNavBar];
+    [self addObservers];
+}
+
+#pragma mark - 创建监听
+- (void)addObservers
+{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryChange:) name:@"categoryDidChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subCategoryChange:) name:@"subCategoryDidChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cityChange:) name:@"cityDidChanged" object:nil];
@@ -109,10 +130,24 @@ static NSString * const reuseIdentifier = @"MainCell";
 #pragma mark - 网络请求
 - (void)createRequest
 {
+    _page = 1;
+    [self request];
+}
+
+- (void)loadMoreData
+{
+    _page++;
+    [self request];
+}
+
+- (void)request
+{
     DPAPI *api = [[DPAPI alloc] init];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:_selectedCityName forKey:@"city"];
     [params setValue:_selectedCategory forKey:@"category"];
+    params[@"limit"] = @6;
+    params[@"page"] = @(self.page);
     [api requestWithURL:@"v1/deal/find_deals" params:(NSMutableDictionary *)params delegate:self];
 }
 
@@ -122,7 +157,8 @@ static NSString * const reuseIdentifier = @"MainCell";
     //NSLog(@"%@", result);
     NSDictionary *dict = result;
     dealModel *md = [[dealModel alloc]init];
-    _dataSource = [md asignModelWithDict:dict];
+    NSArray *arr = [md asignModelWithDict:dict];
+    [_dataSource addObjectsFromArray:arr];
     [self.collectionView reloadData];
     //NSArray *modelArray = [md asignModelWithDict:dict];
     //NSLog(@"%lu === %@", _dataSource.count, [_dataSource[0] title]);
@@ -207,6 +243,13 @@ static NSString * const reuseIdentifier = @"MainCell";
     [cell showUIWithModel:md];
 
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    DetailViewController *dvc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    dvc.md = _dataSource[indexPath.item];
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 //#pragma mark <UICollectionViewDelegate>
